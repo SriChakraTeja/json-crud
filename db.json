@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "price": 155,
+      "name": "Mobile Phone",
+      "brand": "Samsung",
+      "category": "Mobiles"
+    },
+    {
+      "id": 2,
+      "price": 106,
+      "name": "Mobile Phone",
+      "brand": "Nokia",
+      "category": "Mobiles"
+    },
+    {
+      "id": 3,
+      "price": 250,
+      "name": "Smart TV",
+      "brand": "Sony",
+      "category": "Television"
+    },
+    {
+      "id": 4,
+      "price": 80,
+      "name": "Washing Machine",
+      "brand": "LG",
+      "category": "Home Appliances"
+    },
+    {
+      "id": 5,
+      "price": 252,
+      "name": "Cricket Bat",
+      "brand": "SS",
+      "category": "Sports"
+    },
+    {
+      "id": 6,
+      "price": 106,
+      "name": "Mobile Phone",
+      "brand": "iPhone",
+      "category": "Mobiles"
+    }
+  ]
+}
