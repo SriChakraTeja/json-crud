@@ -28,7 +28,7 @@ const UpdateProduct = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3100/products/${id}`, {
+        fetch(`http://localhost:3100/products/edit/${id}`, {
             method: 'PUT',
             body: JSON.stringify(product),
             headers: {
