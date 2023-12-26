@@ -1,42 +1,62 @@
-import React from 'react'
-import { useParams } from 'react-router'
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
 const ProductDetails = () => {
-    const { id } = useParams();
-    const [product, setProduct] = useState([]);
-    const navigate = useNavigate();
-    useEffect(() => {
-        fetch('http://localhost:3100/products/' + id)
-            .then(res => res.json())
-            .then(data => setProduct(data))
-    })
-    const handleDelete = (id) => {
-        fetch('http://localhost:3100/products/'+ id,{
-            method : 'DELETE',
-            headers : {
-                'content-type':'application/json'
-            }
-        }).then(res=>alert('Product Deleted')).catch(err => console.log(err))
-        navigate('/')
-    }   
-    return (
-        <section className='product'>
-            <center>
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title">{product.name}</h1>
-                        <h2 class="card-text">{product.brand}</h2>
-                        <h4 class="card-text">{product.category}</h4>
-                        <button onClick={()=>handleDelete(product.id)} className='btn btn-danger btn-md m-2'>Delete</button>
-                        <Link to="/" >Go Home</Link>
-                    </div>
-                </div>
-            </center>
-        </section>
-    )
-}
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+  const navigate = useNavigate();
 
-export default ProductDetails
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3100/products/${id}`);
+        const data = await response.json();
+        setProduct(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Call the fetchData function
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to run the effect only once
+
+  const handleDelete = () => {
+    fetch(`http://localhost:3100/products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(() => {
+        alert('Product Deleted');
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <section className='product'>
+      <center>
+        <div className='card'>
+          <div className='card-body'>
+            <h1 className='card-title'>{product.name}</h1>
+            <h2 className='card-text'>{product.brand}</h2>
+            <h4 className='card-text'>{product.category}</h4>
+            <button
+              onClick={handleDelete}
+              className='btn btn-danger btn-md m-2'
+            >
+              Delete
+            </button>
+            <Link to='/'>Go Home</Link>
+          </div>
+        </div>
+      </center>
+    </section>
+  );
+};
+
+export default ProductDetails;
